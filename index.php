@@ -38,7 +38,7 @@ $mesures = $pdo->query(
                         <option value="">-- Choisir --</option>
                         <!-- TODO 4 (Ex 7 & 8) : Boucler sur $personnes pour générer les <option> (n'oubliez pas htmlspecialchars) -->
                             <?php foreach ($personnes as $p): ?>
-                             <option value="<?= $p['id'] ?>"><?= $p['nom'] . ' ' . $p['prenom'] ?></option>
+                             <option value="<?= (int) $p['id'] ?>"><?= htmlspecialchars($p['nom'] . ' ' . $p['prenom'], ENT_QUOTES, 'UTF-8') ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>
@@ -81,19 +81,17 @@ $mesures = $pdo->query(
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- TODO 5 (Ex 7 & 8) : Boucler sur $mesures pour afficher chaque ligne <tr> -->
-                    <!-- N'oubliez pas le lien : <a href="supprimer.php?id=...">Supprimer</a> -->
-                     <?php foreach ($mesures as $m): ?>
-                     <tr>
-                      <td><?= $m['nom'] . ' ' . $m['prenom'] ?></td>
-                      <td><?= $m['poids'] ?></td>
-                      <td><?= $m['taille'] ?></td>
-                      <td><?= $m['imc'] ?></td>
-                      <td><?= $m['categorie'] ?></td>
-                      <td><?= $m['date_mesure'] ?></td>
-                      <td><a href="supprimer.php?id=<?= $m['id'] ?>">Supprimer</a></td>
-                     </tr>
-                     <?php endforeach; ?>
+                 <?php foreach ($mesures as $m): ?>
+                 <tr>
+                    <td><?= htmlspecialchars($m['nom'] . ' ' . $m['prenom'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['poids'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['taille'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['imc'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['categorie'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['date_mesure'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><a href="supprimer.php?id=<?= (int) $m['id'] ?>">Supprimer</a></td>
+                 </tr>
+                 <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
